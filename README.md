@@ -1,5 +1,5 @@
 # Vistar Practice Task - Vetclinic
-#1 Technology stack
+## Technology stack
   - Java 8
   - Spring 4
   - Hibernate 5
