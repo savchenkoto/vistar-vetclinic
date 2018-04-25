@@ -1,5 +1,7 @@
 package su.vistar.sample.domain;
 
+import su.vistar.sample.dto.UserDto;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -19,7 +21,22 @@ public class User {
     private Role role;
     private Gender gender;
 
+    public User(UserDto userDto) {
+        this.setId(userDto.getId());
+        this.setName(userDto.getName());
+        this.setAge(userDto.getAge());
+        this.setEmail(userDto.getEmail());
+        this.setPassword(userDto.getPassword());
+        this.setPhoto(userDto.getPhoto());
+        this.setGender(userDto.getGender());
+        this.setRole(userDto.getRole());
+    }
+
+    public User() {
+    }
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     public Integer getId() {
         return id;

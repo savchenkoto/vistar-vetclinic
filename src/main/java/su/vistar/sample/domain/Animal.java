@@ -11,6 +11,7 @@ public class Animal {
     private Collection<Pet> pets;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     public Integer getId() {
         return id;

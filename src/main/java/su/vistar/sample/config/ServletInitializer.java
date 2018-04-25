@@ -1,4 +1,4 @@
-package su.vistar.web.config;
+package su.vistar.sample.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 public class ServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {

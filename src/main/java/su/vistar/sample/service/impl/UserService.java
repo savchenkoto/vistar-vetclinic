@@ -1,34 +1,57 @@
-package su.vistar.web.service.impl;
+package su.vistar.sample.service.impl;
 
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 import org.springframework.stereotype.Service;
-import su.vistar.web.dao.impl.AbstractDao;
-import su.vistar.web.dao.impl.UserDao;
-import su.vistar.web.domain.User;
+import org.springframework.transaction.annotation.Transactional;
+import su.vistar.sample.dao.impl.UserDao;
+import su.vistar.sample.domain.User;
+import su.vistar.sample.dto.UserDto;
+import su.vistar.sample.service.IService;
 
-
+import java.util.ArrayList;
 import java.util.List;
 
+
 @Service("userService")
-public class UserService extends AbstractService<User, Integer> {
+@Transactional
+public class UserService implements IService<UserDto, Integer> {
 
-    private UserDao dao;
-
-    public UserService() {}
+    private final UserDao dao;
 
     @Autowired
-    public UserService(@Qualifier("userDao")AbstractDao<User, Integer> abstractDao) {
-        super(abstractDao);
-        this.dao = (UserDao) abstractDao;
+    public UserService(UserDao dao) {
+        this.dao = dao;
     }
 
-    public User getUserByEmail(String email) {
-        return dao.findByEmail(email);
+    public Integer save(UserDto object) {
+        return dao.save(new User(object));
     }
 
+    public UserDto find(Integer id) {
+        return new UserDto(dao.find(id));
+    }
+
+    public void update(UserDto object) {
+        dao.update(new User(object));
+    }
+
+    public void delete(UserDto object) {
+        dao.delete(new User(object));
+    }
+
+    public List<UserDto> findAll() {
+        List<User> users = dao.list();
+        List<UserDto> usersDto = new ArrayList<UserDto>();
+        for (User user : users) {
+            usersDto.add(new UserDto(user));
+        }
+        return usersDto;
+    }
+
+    public UserDto getUserByEmail(String email) {
+        User user = dao.findByEmail(email);
+        return new UserDto(user);
+    }
 }

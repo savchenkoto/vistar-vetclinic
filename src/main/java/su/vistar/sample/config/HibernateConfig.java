@@ -1,4 +1,4 @@
-package su.vistar.web.config;
+package su.vistar.sample.config;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +9,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import su.vistar.web.domain.*;
 
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -19,7 +17,7 @@ import java.util.Properties;
 @Configuration
 @PropertySource("classpath:dp.properties")
 @EnableTransactionManagement
-@ComponentScan("su.vistar.web")
+@ComponentScan("su.vistar.sample")
 public class HibernateConfig {
 
     private final Environment env;
@@ -44,7 +42,7 @@ public class HibernateConfig {
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
         factoryBean.setDataSource(getDataSource());
         factoryBean.setHibernateProperties(hibernateProperties());
-        factoryBean.setPackagesToScan("su.vistar.web.domain");
+        factoryBean.setPackagesToScan("su.vistar.sample.domain");
         return factoryBean;
     }
 

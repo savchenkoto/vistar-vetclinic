@@ -1,7 +1,6 @@
-package su.vistar.web.service.impl;
+package su.vistar.sample.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -9,9 +8,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import su.vistar.web.dao.impl.UserDao;
-import su.vistar.web.domain.Role;
-import su.vistar.web.domain.User;
+import su.vistar.sample.domain.User;
+import su.vistar.sample.dto.UserDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +30,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-        User user = userService.getUserByEmail(email);
+        UserDto user = userService.getUserByEmail(email);
         if (user == null) {
             throw new UsernameNotFoundException("Email not found");
         }
@@ -53,11 +51,11 @@ public class CustomUserDetailsService implements UserDetailsService {
                 );
     }
 
-        private List<GrantedAuthority> getAuthorities(User user) {
+        private List<GrantedAuthority> getAuthorities(UserDto user) {
 
             List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
             grantedAuthorities.add(new SimpleGrantedAuthority(
-                    String.format("ROLE_%s", user.getRoleByRoleId().getRole())
+                    String.format("ROLE_%s", user.getRole().getType())
             ));
             return grantedAuthorities;
 

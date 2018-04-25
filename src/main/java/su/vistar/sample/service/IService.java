@@ -3,15 +3,15 @@ package su.vistar.sample.service;
 import java.io.Serializable;
 import java.util.List;
 
-public interface IAbstractService<T, PK extends Serializable> {
+public interface IService<T, PK extends Serializable> {
 
-    PK save(T newInstance);
+    PK save(T object);
 
     T find(PK id);
 
-    void update(T transientObject);
+    void update(T object);
 
-    void delete(T persistentObject);
+    void delete(T object);
 
     List<T> findAll();
 

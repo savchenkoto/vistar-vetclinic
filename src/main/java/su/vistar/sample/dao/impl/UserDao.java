@@ -1,15 +1,12 @@
-package su.vistar.web.dao.impl;
+package su.vistar.sample.dao.impl;
 
-import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
-import su.vistar.web.domain.User;
+import su.vistar.sample.domain.User;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-import java.util.List;
 
 @Repository("userDao")
 public class UserDao extends AbstractDao<User, Integer> {

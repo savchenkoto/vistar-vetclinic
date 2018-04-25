@@ -1,4 +1,4 @@
-package su.vistar.web.security;
+package su.vistar.sample.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -8,8 +8,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-
-import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
@@ -31,12 +29,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/", "/home").permitAll()
-                .antMatchers("/profile/**").authenticated()
+                .antMatchers("/me/**").authenticated()
                 .antMatchers("/admin/**").access("hasRole('ADMIN')")
                 .and().formLogin()
                 .usernameParameter("email").passwordParameter("password")
                 .and().csrf()
-                .and().exceptionHandling().accessDeniedPage("/Access_Denied");
+                .and().exceptionHandling().accessDeniedPage("/accessDenied");
     }
 
 }

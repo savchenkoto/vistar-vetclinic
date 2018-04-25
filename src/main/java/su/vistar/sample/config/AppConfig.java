@@ -1,19 +1,17 @@
-package su.vistar.web.config;
+package su.vistar.sample.config;
 
-import org.springframework.cglib.core.Local;
 import org.springframework.context.annotation.*;
-import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
-import su.vistar.web.security.SecurityConfig;
+import su.vistar.sample.security.SecurityConfig;
 
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("su.vistar.web")
+@ComponentScan("su.vistar.sample")
 @Import({SecurityConfig.class})
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 public class AppConfig extends WebMvcConfigurerAdapter {
@@ -22,6 +20,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
         registry.addResourceHandler("/webjars/**").addResourceLocations("/webjars/");
+        registry.addResourceHandler("/images/**").addResourceLocations("/images/");
     }
 
     @Bean

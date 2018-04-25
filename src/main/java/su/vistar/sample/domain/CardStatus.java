@@ -11,6 +11,7 @@ public class CardStatus {
     private Collection<MedicalCard> medicalCards;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     public Integer getId() {
         return id;

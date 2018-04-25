@@ -1,4 +1,4 @@
-package su.vistar.web.security;
+package su.vistar.sample.security;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 

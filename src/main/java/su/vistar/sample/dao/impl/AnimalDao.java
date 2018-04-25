@@ -1,8 +1,8 @@
-package su.vistar.web.dao.impl;
+package su.vistar.sample.dao.impl;
 
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
-import su.vistar.web.domain.Animal;
+import su.vistar.sample.domain.Animal;
 
 @Repository("animalDao")
 public class AnimalDao extends AbstractDao<Animal, Integer> {

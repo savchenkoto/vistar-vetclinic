@@ -1,11 +1,10 @@
-package su.vistar.web.dao.impl;
+package su.vistar.sample.dao.impl;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
-import su.vistar.web.dao.IAbstractDao;
+import su.vistar.sample.dao.IAbstractDao;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -34,20 +33,20 @@ public abstract class AbstractDao<T, PK extends Serializable> implements IAbstra
 
 
     @SuppressWarnings("unchecked")
-    public PK save(T newInstance) {
-        return (PK)getSession().save(newInstance);
+    public PK save(T object) {
+        return (PK)getSession().save(object);
     }
 
     public T find(PK id) {
         return (T) getSession().get(persistentClass, id);
     }
 
-    public void update(T transientObject) {
-        getSession().update(transientObject);
+    public void update(T object) {
+        getSession().update(object);
     }
 
-    public void delete(T persistentObject) {
-        getSession().delete(persistentObject);
+    public void delete(T object) {
+        getSession().delete(object);
     }
 
     public List<T> list() {

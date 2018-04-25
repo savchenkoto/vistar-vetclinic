@@ -1,5 +1,7 @@
 package su.vistar.sample.domain;
 
+import su.vistar.sample.dto.VisitDto;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -14,7 +16,19 @@ public class Visit {
     private Timestamp updatedAt;
     private MedicalCard medicalCard;
 
+    public Visit(VisitDto visitDto) {
+        this.setId(visitDto.getId());
+        this.setDate(visitDto.getDate());
+        this.setDescription(visitDto.getDescription());
+        this.setTreatment(visitDto.getTreatment());
+        this.setUpdatedAt(visitDto.getUpdatedAt());
+        this.setMedicalCard(visitDto.getMedicalCard());
+    }
+
+    public Visit() { }
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     public Integer getId() {
         return id;

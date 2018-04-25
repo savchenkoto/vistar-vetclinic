@@ -5,8 +5,9 @@
   Time: 13:07
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page pageEncoding="UTF-8" %>
 <%@ taglib uri="http://www.rapid-framework.org.cn/rapid" prefix="rapid" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 
@@ -18,11 +19,12 @@
   <title>Paw Clinic</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="webjars/bootstrap/4.0.0-2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="<c:url value="/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css" />" rel="stylesheet">
 
-  <link href="../../resources/css/logo-nav.css" rel="stylesheet">
-  <link href="../../resources/css/half-slider.css" rel="stylesheet">
-  <link href="../../resources/css/business-frontpage.css" rel="stylesheet">
+
+  <link href="<c:url value="/resources/css/logo-nav.css"/>" rel="stylesheet">
+  <link href="<c:url value="/resources/css/half-slider.css"/>" rel="stylesheet">
+  <link href="<c:url value="/resources/css/business-frontpage.css"/>" rel="stylesheet">
 
 </head>
 <body>
@@ -30,8 +32,8 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container">
-    <a class="navbar-brand" href="/">
-      <img src="../../resources/images/logo.png" width="50" height="46" alt="">
+    <a class="navbar-brand" href="<c:url value="/"/>">
+      <img src="../../images/logo.png" width="50" height="46" alt="">
       <span style="display: inline-block;">Paw Clinic</span>
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,12 +42,12 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="/">Home
+          <a class="nav-link" href="<c:url value="/"/>">Home
             <span class="sr-only">(current)</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="login">Sing In</a>
+          <a class="nav-link" href="<c:url value="/me"/>">Sing In</a>
         </li>
       </ul>
     </div>
@@ -62,21 +64,21 @@
       </ol>
       <div class="carousel-inner" role="listbox">
         <!-- Slide One - Set the background image for this slide in the line below -->
-        <div class="carousel-item active" style="background-image: url(../../resources/images/home1.jpg)">
+        <div class="carousel-item active" style="background-image: url(../../images/slider1.jpg)">
           <div class="carousel-caption d-none d-md-block">
               <%--<h3>First Slide</h3>--%>
               <%--<p>This is a description for the first slide.</p>--%>
           </div>
         </div>
         <!-- Slide Two - Set the background image for this slide in the line below -->
-        <div class="carousel-item" style="background-image: url(../../resources/images/home2.jpg)">
+        <div class="carousel-item" style="background-image: url(../../images/slider2.jpg)">
           <div class="carousel-caption d-none d-md-block">
               <%--<h3>Second Slide</h3>--%>
               <%--<p>This is a description for the second slide.</p>--%>
           </div>
         </div>
         <!-- Slide Three - Set the background image for this slide in the line below -->
-        <div class="carousel-item" style="background-image: url(../../resources/images/home3.jpg)">
+        <div class="carousel-item" style="background-image: url(../../images/slider3.jpg)">
           <div class="carousel-caption d-none d-md-block">
               <%--<h3>Third Slide</h3>--%>
               <%--<p>This is a description for the third slide.</p>--%>

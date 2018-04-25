@@ -1,93 +1,52 @@
-package su.vistar.web.dto;
+package su.vistar.sample.dto;
 
+import com.sun.istack.NotNull;
+import lombok.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import su.vistar.sample.domain.Gender;
+import su.vistar.sample.domain.Role;
+import su.vistar.sample.domain.User;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+@Data
+@AllArgsConstructor
 public class UserDto {
 
+    private Integer id;
+
+    @NonNull
     private String email;
+
+    @NonNull
     private String password;
+
+
+    @NonNull
     private String name;
-    private Integer age;
-    private String role;
+
+    @NonNull
+    private Role role;
+
+    private Gender gender;
+
+    private Short age;
+
     private String photo;
 
-    public UserDto(String email, String password, String name, Integer age, String role) {
-        this.email = email;
-        this.password = password;
-        this.name = name;
-        this.age = age;
-        this.role = role;
+    public UserDto(@NonNull User user) {
+        this.setId(user.getId());
+        this.setEmail(user.getEmail());
+        this.setPassword(user.getPassword());
+        this.setName(user.getName());
+        this.setAge(user.getAge());
+        this.setGender(user.getGender());
+        this.setRole(user.getRole());
+        this.setPhoto(user.getPhoto());
     }
 
-    public String getEmail() {
-        return email;
-    }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        UserDto user = (UserDto) o;
-
-        if (!email.equals(user.email)) return false;
-        if (!password.equals(user.password)) return false;
-        if (!name.equals(user.name)) return false;
-        if (age != null ? !age.equals(user.age) : user.age != null) return false;
-        if (!role.equals(user.role)) return false;
-        return photo != null ? photo.equals(user.photo) : user.photo == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = email.hashCode();
-        result = 31 * result + password.hashCode();
-        result = 31 * result + name.hashCode();
-        result = 31 * result + (age != null ? age.hashCode() : 0);
-        result = 31 * result + role.hashCode();
-        result = 31 * result + (photo != null ? photo.hashCode() : 0);
-        return result;
-    }
 }
