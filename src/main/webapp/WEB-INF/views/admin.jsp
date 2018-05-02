@@ -13,7 +13,7 @@
   <title>Admin page</title>
 </head>
 <body>
-<h1>Dear <strong>${user}</strong>, Welcome to Admin Page.</h1>
+<h1>Dear <strong>${user.name}</strong>, Welcome to Admin Page.</h1>
 <a href="<c:url value="/logout" />">Logout</a>
 </body>
 </html>

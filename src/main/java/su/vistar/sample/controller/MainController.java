@@ -1,28 +1,23 @@
 package su.vistar.sample.controller;
 
-import lombok.AccessLevel;
-import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import su.vistar.sample.dto.UserDto;
+import su.vistar.sample.dto.ProfileInfoDto;
 import su.vistar.sample.service.impl.UserService;
-import su.vistar.sample.service.impl.VisitService;
+
+import java.security.Principal;
 
 @Controller
 public class MainController {
 
-    final private VisitService visitService;
     final private UserService userService;
 
     @Autowired
-    public MainController(UserService userService, VisitService visitService) {
+    public MainController(UserService userService) {
         this.userService = userService;
-        this.visitService = visitService;
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -33,30 +28,19 @@ public class MainController {
     }
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
-    public ModelAndView adminPage() {
+    public ModelAndView adminPage(Principal principal) {
         ModelAndView model = new ModelAndView("admin");
-        model.addObject("user", getPrincipal());
+        model.addObject("user", principal);
         return model;
     }
 
     @RequestMapping(value = "/me", method = RequestMethod.GET)
-    public ModelAndView profilePage() {
+    public ModelAndView profilePage(Principal principal) {
         ModelAndView model = new ModelAndView("profile");
-        UserDto user = userService.getUserByEmail(getPrincipal());
-        model.addObject("user", user);
+        ProfileInfoDto profileInfo = userService.getProfileByEmail(principal.getName());
+        model.addObject("profile", profileInfo);
         return model;
     }
 
-    private String getPrincipal(){
-        String userName = null;
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        if (principal instanceof UserDetails) {
-            userName = ((UserDetails)principal).getUsername();
-        } else {
-            userName = principal.toString();
-        }
-        return userName;
-    }
 
 }

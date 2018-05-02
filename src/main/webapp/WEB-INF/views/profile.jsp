@@ -18,25 +18,52 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-4 block">
+    <div class="col-md-4">
       <div>
         <c:choose>
-          <c:when test="${user.role.role == 'CLIENT'}">
+          <c:when test="${profile.role == 'CLIENT'}">
             <img class="img-fluid" src="<c:url value="/images/nouser.png"/>" alt="image">
           </c:when>
-          <c:when test="${user.role.role == 'DOCTOR'}">
+          <c:when test="${profile.role == 'DOCTOR'}">
             <img class="img-fluid" src="<c:url value="/images/nodoctor.jpg"/>" alt="image">
           </c:when>
         </c:choose>
       </div>
       <div>
-        <h1>${user.name}</h1>
-        <h2>${user.email}</h2>
+        <h1>${profile.name}</h1>
+        <h2>${profile.email}</h2>
+        <p></p>
       </div>
     </div>
     <div class="col-md-8 block">
       <div>
-
+        <c:choose>
+          <c:when test="${profile.lastVisit == null}">
+            <p>You haven't come to us yet!</p>
+          </c:when>
+          <c:otherwise>
+            <h2>Last visit: ${profile.lastVisit.date}</h2>
+            <p>Updated at ${profile.lastVisit.updatedAt}</p>
+            <p>${profile.lastVisit.petName}</p>
+          </c:otherwise>
+        </c:choose>
+      </div>
+      <div>
+        <h2>My pets</h2>
+        <c:choose>
+          <c:when test="${profile.pets == null}">
+            <p>You have no pets...</p>
+          </c:when>
+          <c:otherwise>
+            <ul>
+              <c:forEach items="${profile.pets}" var="pet">
+                <li>
+                  <p>${pet.animal.type} ${pet.name}</p>
+                </li>
+              </c:forEach>
+            </ul>
+          </c:otherwise>
+        </c:choose>
       </div>
     </div>
   </div>

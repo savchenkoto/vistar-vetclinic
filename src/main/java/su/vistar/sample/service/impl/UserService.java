@@ -1,57 +1,60 @@
 package su.vistar.sample.service.impl;
 
-import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import su.vistar.sample.converters.impl.ProfileConverter;
+import su.vistar.sample.converters.impl.UserConverter;
+import su.vistar.sample.converters.impl.VisitConverter;
+import su.vistar.sample.converters.impl.VisitPreviewConverter;
+import su.vistar.sample.dao.impl.AbstractDao;
 import su.vistar.sample.dao.impl.UserDao;
-import su.vistar.sample.domain.User;
-import su.vistar.sample.dto.UserDto;
-import su.vistar.sample.service.IService;
+import su.vistar.sample.dao.impl.VisitDao;
+import su.vistar.sample.domain.UserEntity;
+import su.vistar.sample.domain.VisitEntity;
+import su.vistar.sample.dto.VisitPreviewDto;
+import su.vistar.sample.dto.regular.UserDto;
+import su.vistar.sample.dto.ProfileInfoDto;
+import su.vistar.sample.dto.regular.VisitDto;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.criteria.CriteriaBuilder;
 
 
 @Service("userService")
 @Transactional
-public class UserService implements IService<UserDto, Integer> {
+public class UserService extends AbstractService<UserEntity, UserDto, Integer> {
 
-    private final UserDao dao;
+    private UserDao userDao;
+
+    private VisitDao visitDao;
+
+    private final UserConverter userConverter;
+
+    private final ProfileConverter profileConverter;
 
     @Autowired
-    public UserService(UserDao dao) {
-        this.dao = dao;
-    }
-
-    public Integer save(UserDto object) {
-        return dao.save(new User(object));
-    }
-
-    public UserDto find(Integer id) {
-        return new UserDto(dao.find(id));
-    }
-
-    public void update(UserDto object) {
-        dao.update(new User(object));
-    }
-
-    public void delete(UserDto object) {
-        dao.delete(new User(object));
-    }
-
-    public List<UserDto> findAll() {
-        List<User> users = dao.list();
-        List<UserDto> usersDto = new ArrayList<UserDto>();
-        for (User user : users) {
-            usersDto.add(new UserDto(user));
-        }
-        return usersDto;
+    public UserService(@Qualifier("userDao") AbstractDao<UserEntity, Integer> userDao,
+                       AbstractDao<VisitEntity, Integer> visitDao,
+                       UserConverter userConverter,
+                       VisitPreviewConverter visitPreviewConverter,
+                       ProfileConverter profileConverter) {
+        super(userDao, userConverter);
+        this.userDao = (UserDao) userDao;
+        this.visitDao = (VisitDao) visitDao;
+        this.userConverter = userConverter;
+        this.profileConverter = profileConverter;
     }
 
     public UserDto getUserByEmail(String email) {
-        User user = dao.findByEmail(email);
-        return new UserDto(user);
+        return userConverter.toDto(userDao.findByEmail(email));
     }
+
+    public ProfileInfoDto getProfileByEmail(String email) {
+        UserEntity user = userDao.findByEmail(email);
+        VisitEntity lastVisit = visitDao.getLastVisitByUserId(email);
+        return profileConverter.toDto(user, lastVisit);
+    }
+
 }

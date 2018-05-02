@@ -3,7 +3,7 @@ package su.vistar.sample.dao;
 import java.io.Serializable;
 import java.util.List;
 
-public interface IAbstractDao<T, PK extends Serializable> {
+public interface IDao<T, PK extends Serializable> {
 
     PK save(T object);
 

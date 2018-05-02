@@ -4,7 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import su.vistar.sample.dao.IAbstractDao;
+import su.vistar.sample.dao.IDao;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -14,7 +14,7 @@ import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 @Repository
-public abstract class AbstractDao<T, PK extends Serializable> implements IAbstractDao<T, PK> {
+public abstract class AbstractDao<T, PK extends Serializable> implements IDao<T, PK> {
 
     private final Class<T> persistentClass;
 
@@ -27,7 +27,7 @@ public abstract class AbstractDao<T, PK extends Serializable> implements IAbstra
 
     private final SessionFactory sessionFactory;
 
-    protected Session getSession() {
+    Session getSession() {
         return sessionFactory.getCurrentSession();
     }
 
