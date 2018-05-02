@@ -17,6 +17,13 @@
 <body>
 
 <div class="container">
+  <ul>
+    <c:forEach items="${users}" var="user">
+      <li>
+        <p>${user.email} ${user.name} ${user.gender} ${user.age}</p>
+      </li>
+    </c:forEach>
+  </ul>
   <div class="row">
     <div class="col-md-4">
       <div>

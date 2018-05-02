@@ -6,9 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import su.vistar.sample.dto.ProfileInfoDto;
+import su.vistar.sample.dto.regular.UserDto;
 import su.vistar.sample.service.impl.UserService;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 public class MainController {
@@ -38,7 +40,9 @@ public class MainController {
     public ModelAndView profilePage(Principal principal) {
         ModelAndView model = new ModelAndView("profile");
         ProfileInfoDto profileInfo = userService.getProfileByEmail(principal.getName());
+        List<UserDto> users = userService.findAll();
         model.addObject("profile", profileInfo);
+        model.addObject("users", users);
         return model;
     }
 

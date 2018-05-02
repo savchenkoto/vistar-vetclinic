@@ -15,8 +15,7 @@ public class UserDto {
 
     @NonNull
     private String name;
-
-    @NonNull
+    
     private Short age;
 
     @NonNull

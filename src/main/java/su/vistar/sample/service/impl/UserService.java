@@ -35,10 +35,9 @@ public class UserService extends AbstractService<UserEntity, UserDto, Integer> {
     private final ProfileConverter profileConverter;
 
     @Autowired
-    public UserService(@Qualifier("userDao") AbstractDao<UserEntity, Integer> userDao,
+    public UserService(AbstractDao<UserEntity, Integer> userDao,
                        AbstractDao<VisitEntity, Integer> visitDao,
                        UserConverter userConverter,
-                       VisitPreviewConverter visitPreviewConverter,
                        ProfileConverter profileConverter) {
         super(userDao, userConverter);
         this.userDao = (UserDao) userDao;
