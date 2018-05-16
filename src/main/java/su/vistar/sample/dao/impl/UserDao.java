@@ -4,9 +4,9 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import su.vistar.sample.domain.UserEntity;
-import su.vistar.sample.domain.VisitEntity;
 
 import javax.persistence.Query;
+import java.util.List;
 
 @Repository("userDao")
 public class UserDao extends AbstractDao<UserEntity, Integer> {
@@ -17,7 +17,12 @@ public class UserDao extends AbstractDao<UserEntity, Integer> {
     }
 
     public UserEntity findByEmail(String email) {
+        UserEntity result = null;
         Query query = getSession().getNamedQuery("User.findByEmail").setParameter("email", email);
-        return (UserEntity) query.getSingleResult();
+        List userEntities = ((org.hibernate.query.Query) query).list();
+        if (!userEntities.isEmpty()) {
+            result = (UserEntity) userEntities.get(0);
+        }
+        return result;
     }
 }

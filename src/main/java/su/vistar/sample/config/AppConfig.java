@@ -2,13 +2,16 @@ package su.vistar.sample.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.*;
+import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
-
-import javax.jws.WebParam;
+import org.thymeleaf.spring4.SpringTemplateEngine;
+import org.thymeleaf.spring4.view.ThymeleafViewResolver;
+import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
 
 @Configuration
@@ -26,20 +29,17 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public InternalResourceViewResolver viewResolver() {
-
+    public ViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setViewClass(JstlView.class);
         viewResolver.setPrefix("/WEB-INF/views/");
         viewResolver.setSuffix(".jsp");
         return viewResolver;
-
     }
 
     @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();
     }
-
 
 }

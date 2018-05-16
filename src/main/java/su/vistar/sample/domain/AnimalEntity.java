@@ -5,6 +5,9 @@ import lombok.Data;
 import javax.persistence.*;
 import java.util.Collection;
 
+@NamedQueries({
+        @NamedQuery(name = "Animal.findByType", query = "from AnimalEntity where type = :type")
+})
 @Data
 @Entity
 @Table(name = "animals", schema = "public", catalog = "vetclinic")

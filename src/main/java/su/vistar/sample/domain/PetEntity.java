@@ -21,8 +21,8 @@ public class PetEntity {
     private String name;
 
     @Basic
-    @Column(name = "birthdate", nullable = true)
-    private Date birthdate;
+    @Column(name = "birthday", nullable = true)
+    private Date birthday;
 
     @Basic
     @Column(name = "photo", nullable = true, length = 45)

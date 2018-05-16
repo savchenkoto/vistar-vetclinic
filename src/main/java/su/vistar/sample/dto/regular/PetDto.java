@@ -19,7 +19,7 @@ public class PetDto {
     @NonNull
     private String name;
 
-    private Date birthdate;
+    private Date birthday;
 
     private String photo;
 

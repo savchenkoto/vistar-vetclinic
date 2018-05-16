@@ -25,9 +25,8 @@ public class ProfileConverter extends AbstractConverter<UserEntity, ProfileInfoD
     public ProfileInfoDto toDto(UserEntity user, VisitEntity visit) {
 
         ProfileInfoDto profileDto = new ProfileInfoDto();
-        profileDto.setName(user.getName());
-        profileDto.setAge(user.getAge());
-        profileDto.setGender(user.getGender().getType());
+        profileDto.setFirstName(user.getFirstName());
+        profileDto.setLastName(user.getLastName());
         profileDto.setEmail(user.getEmail());
         profileDto.setPhoto(user.getPhoto());
         profileDto.setRole(user.getRole().getType());

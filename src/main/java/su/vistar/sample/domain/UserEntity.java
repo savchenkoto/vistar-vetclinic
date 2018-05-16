@@ -1,8 +1,6 @@
 package su.vistar.sample.domain;
 
 import lombok.Data;
-import lombok.NonNull;
-import su.vistar.sample.dto.regular.UserDto;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -22,12 +20,12 @@ public class UserEntity {
     private Integer id;
 
     @Basic
-    @Column(name = "name", nullable = false, length = 45)
-    private String name;
+    @Column(name = "first_name", nullable = false, length = 45)
+    private String firstName;
 
     @Basic
-    @Column(name = "age", nullable = true)
-    private Short age;
+    @Column(name = "last_name", nullable = false, length = 45)
+    private String lastName;
 
     @Basic
     @Column(name = "email", nullable = false, length = 45)
@@ -53,10 +51,5 @@ public class UserEntity {
     @ManyToOne
     @JoinColumn(name = "role_id", referencedColumnName = "id", nullable = false)
     private RoleEntity role;
-
-    @ManyToOne
-    @JoinColumn(name = "gender_id", referencedColumnName = "id", nullable = false)
-    private GenderEntity gender;
-
 
 }

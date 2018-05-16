@@ -26,7 +26,4 @@ public class MedicalCardDto {
     @NonNull
     private UserDto doctor;
 
-    @NonNull
-    private CardStatusDto cardStatus;
-
 }

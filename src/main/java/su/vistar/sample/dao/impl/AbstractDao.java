@@ -37,6 +37,10 @@ public abstract class AbstractDao<T, PK extends Serializable> implements IDao<T,
         return (PK)getSession().save(object);
     }
 
+    public void saveOrUpdate(T object) {
+        getSession().saveOrUpdate(object);
+    }
+
     public T find(PK id) {
         return (T) getSession().get(persistentClass, id);
     }

@@ -1,35 +1,45 @@
 package su.vistar.sample.dto.regular;
 
 import lombok.*;
-import su.vistar.sample.domain.GenderEntity;
-import su.vistar.sample.domain.RoleEntity;
-import su.vistar.sample.domain.UserEntity;
+
+import org.hibernate.validator.constraints.NotEmpty;
+import su.vistar.sample.validators.annotations.PasswordMatches;
+import su.vistar.sample.validators.annotations.ValidEmail;
+
+import javax.validation.constraints.NotNull;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@PasswordMatches
 public class UserDto {
 
     @NonNull
-    private Integer id;
+    @NotNull
+    @NotEmpty
+    private String firstName;
 
     @NonNull
-    private String name;
+    @NotNull
+    @NotEmpty
+    private String lastName;
     
-    private Short age;
-
     @NonNull
+    @NotNull
+    @NotEmpty
+    @ValidEmail
     private String email;
 
-    @NonNull
+    @NotNull
+    @NotEmpty
     private String password;
+    private String matchingPassword;
+
 
     private String photo;
 
     @NonNull
+    @NotNull
     private RoleDto role;
-
-    @NonNull
-    private GenderDto gender;
 
 }

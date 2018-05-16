@@ -13,4 +13,14 @@ public class UserConverter extends AbstractConverter<UserEntity, UserDto> {
         super(modelMapper);
     }
 
+//    @Override
+//    public UserEntity toEntity(UserDto userDto) {
+//        UserEntity userEntity = new UserEntity();
+//        userEntity.setEmail(userDto.getEmail());
+//        userEntity.setPassword(userDto.getPassword());
+//        userEntity.setFirstName(userDto.getFirstName());
+//        userEntity.setLastName(userDto.getLastName());
+//        userDto.
+//    }
+
 }

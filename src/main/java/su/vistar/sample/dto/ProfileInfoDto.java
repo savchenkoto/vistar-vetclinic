@@ -7,28 +7,28 @@ import su.vistar.sample.dto.regular.PetDto;
 import su.vistar.sample.dto.regular.VisitDto;
 
 import java.util.Collection;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 public class ProfileInfoDto {
 
     @NonNull
-    private String name;
+    private String firstName;
+
+    @NonNull
+    private String lastName;
 
     @NonNull
     private String email;
-
-    @NonNull
-    private String gender;
-
-    private Short age;
 
     private String photo;
 
     @NonNull
     private String role;
 
-    private Collection<PetDto> pets;
+    @NonNull
+    private List<PetDto> pets;
 
     private VisitPreviewDto lastVisit;
 

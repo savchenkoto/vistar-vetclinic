@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@PropertySource("classpath:dp.properties")
+@PropertySource("classpath:database.properties")
 @EnableTransactionManagement
 @ComponentScan("su.vistar.sample")
 public class HibernateConfig {
