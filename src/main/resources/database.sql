@@ -6,73 +6,27 @@ create table roles
   type varchar(45) not null
 );
 
-create unique index roles_role_uindex
-  on roles (type);
-
-create table animals
-(
-  id   serial      not null
-    constraint animals_pkey
-    primary key,
-  type varchar(45) not null
-);
-
-create unique index animals_animal_uindex
-  on animals (type);
-
-create table card_statuses
-(
-  id   serial      not null
-    constraint card_statuses_pkey
-    primary key,
-  type varchar(45) not null
-);
-
-create table genders
-(
-  id   serial      not null
-    constraint genders_id_pk
-    primary key,
-  type varchar(45) not null
-);
-
 create table users
 (
-  id        serial      not null
+  id         serial                 not null
     constraint users_pkey
     primary key,
-  name      varchar(45) not null,
-  age       smallint,
-  email     varchar(45) not null,
-  password  varchar(45) not null,
-  photo     varchar(45),
-  role_id   integer     not null
+  email      varchar(45)            not null,
+  password   varchar(255)           not null,
+  photo      varchar(45),
+  role_id    integer                not null
     constraint users_roles_id_fk
     references roles
     on update cascade,
-  gender_id integer     not null
-    constraint users_genders_id_fk
-    references genders
+  first_name varchar(45) default 12 not null,
+  last_name  varchar(45) default 45 not null
 );
 
 create unique index users_email_uindex
-  on users (email);
+  on users (password);
 
-create table pets
-(
-  id        serial      not null
-    constraint pets_pkey
-    primary key,
-  type_id   integer     not null
-    constraint pets_animals_id_fk
-    references animals,
-  owner_id  integer     not null
-    constraint pets_users_id_fk
-    references users,
-  name      varchar(45) not null,
-  birthdate date,
-  photo     varchar(45)
-);
+create unique index roles_role_uindex
+  on roles (type);
 
 create table messages
 (
@@ -87,6 +41,41 @@ create table messages
     references users,
   message      text      not null,
   delivered_at timestamp not null
+);
+
+create table animals
+(
+  id   serial      not null
+    constraint animals_pkey
+    primary key,
+  type varchar(45) not null
+);
+
+create table pets
+(
+  id       serial      not null
+    constraint pets_pkey
+    primary key,
+  type_id  integer     not null
+    constraint pets_animals_id_fk
+    references animals,
+  owner_id integer     not null
+    constraint pets_users_id_fk
+    references users,
+  name     varchar(45) not null,
+  birthday date,
+  photo    varchar(45)
+);
+
+create unique index animals_animal_uindex
+  on animals (type);
+
+create table card_statuses
+(
+  id   serial      not null
+    constraint card_statuses_pkey
+    primary key,
+  type varchar(45) not null
 );
 
 create table medical_cards
@@ -120,4 +109,3 @@ create table visits
   treatment       text      not null,
   updated_at      timestamp not null
 );
-
