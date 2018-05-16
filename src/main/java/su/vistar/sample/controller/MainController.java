@@ -31,7 +31,7 @@ public class MainController {
 
     @RequestMapping(value = "/me", method = RequestMethod.GET)
     public ModelAndView profilePage(Principal principal) {
-        ModelAndView model = new ModelAndView("profile");
+        ModelAndView model = new ModelAndView("clientProfile");
         ProfileInfoDto profile = userService.getProfileByEmail(principal.getName());
         model.addObject("profile", profile);
         return model;
